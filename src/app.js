@@ -145,7 +145,7 @@ function renderEpisodeList(episodes) {
         <button class="episode-row ${episode.id === state.selectedId ? "active" : ""}" type="button" data-id="${escapeAttr(episode.id)}">
           <span class="row-main">
             <strong>${escapeHtml(episode.patientName)}</strong>
-            <span>DNI ${escapeHtml(episode.dni)} · ${escapeHtml(episode.service || "Sin efector")}</span>
+            <span>DNI ${escapeHtml(episode.dni)}</span>
           </span>
           <span class="state-badge ${stateClass(episode.status)}">${escapeHtml(episode.status)}</span>
           <span class="row-meta">
@@ -175,7 +175,7 @@ function renderDetail() {
     <div class="detail-header">
       <div>
         <h2>${escapeHtml(episode.patientName)}</h2>
-        <p>DNI ${escapeHtml(episode.dni)} · ${escapeHtml(episode.service || "Sin efector informado")}</p>
+        <p>DNI ${escapeHtml(episode.dni)}</p>
       </div>
       <span class="state-badge large ${stateClass(episode.status)}">${escapeHtml(episode.status)}</span>
     </div>
