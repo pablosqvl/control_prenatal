@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Seguimiento de control prenatal</title>
+    <link rel="stylesheet" href="src/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <h1>Seguimiento de control prenatal</h1>
+          <p id="statusLine">Esperando archivos.</p>
+        </div>
+        <div class="topbar-actions">
+          <button id="exportCsvBtn" class="button secondary" type="button">Exportar CSV</button>
+          <button id="exportXlsxBtn" class="button secondary" type="button">Exportar XLSX</button>
+          <label class="theme-toggle">
+            <input id="darkModeToggle" type="checkbox" />
+            <span>Modo oscuro</span>
+          </label>
+        </div>
+      </header>
+
+      <main>
+        <section class="upload-grid" aria-label="Carga de archivos">
+          <label class="upload-card" for="rismiInput">
+            <span class="upload-title">RISMI Excel</span>
+            <span class="upload-help">Cargar uno o varios .xls/.xlsx</span>
+            <input id="rismiInput" type="file" accept=".xls,.xlsx" multiple />
+          </label>
+          <label class="upload-card" for="sigepInput">
+            <span class="upload-title">DOM SIGEP PDF</span>
+            <span class="upload-help">Cargar uno o varios reportes DOM</span>
+            <input id="sigepInput" type="file" accept=".pdf" multiple />
+          </label>
+        </section>
+
+        <section class="kpi-grid" aria-label="Indicadores">
+          <article class="kpi">
+            <span>Embarazos</span>
+            <strong id="kpiPregnancies">0</strong>
+          </article>
+          <article class="kpi">
+            <span>Captación temprana</span>
+            <strong id="kpiEarly">0</strong>
+          </article>
+          <article class="kpi">
+            <span>Trazadora completa</span>
+            <strong id="kpiComplete">0</strong>
+          </article>
+          <article class="kpi">
+            <span>Pendientes SIGEP</span>
+            <strong id="kpiSigep">0</strong>
+          </article>
+          <article class="kpi">
+            <span>Correcciones RISMI</span>
+            <strong id="kpiCorrections">0</strong>
+          </article>
+        </section>
+
+        <section class="workspace">
+          <aside class="panel list-panel">
+            <div class="panel-heading">
+              <h2>Embarazos</h2>
+              <span id="episodeCount" class="muted">0 casos</span>
+            </div>
+            <div class="controls-row">
+              <input id="searchInput" class="text-input" type="search" placeholder="Buscar por DNI o nombre" />
+              <select id="sortSelect" class="select-input">
+                <option value="priority">Prioridad</option>
+                <option value="name">Nombre</option>
+                <option value="lastDate">Último control</option>
+                <option value="fpp">FPP</option>
+                <option value="ege">EGE</option>
+              </select>
+            </div>
+            <div id="filterBar" class="filter-bar" aria-label="Filtros por estado"></div>
+            <div id="episodeList" class="episode-list"></div>
+          </aside>
+
+          <section class="panel detail-panel" aria-label="Detalle del episodio">
+            <div id="episodeDetail" hidden></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="src/prenatal.js"></script>
+    <script src="src/sigep-pdf.js"></script>
+    <script src="src/xlsx-lite.js"></script>
+    <script src="src/exporters.js"></script>
+    <script src="src/app.js"></script>
+  </body>
+</html>
